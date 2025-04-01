@@ -5,7 +5,13 @@
 # use
 
 ```bash
-kubectl -n test-ns debug -it test-demo --image=docker.io/calacaly/pod-debug --target=test-demo
+# create test nginx pod
+kubectl run nginx --image=nginx
+
+# attach debug pod
+kubectl debug -it nginx --image=docker.io/calacaly/pod-debug:master --target=nginx
+
+
 ```
 
 
@@ -44,6 +50,10 @@ kubectl -n test-ns debug -it test-demo --image=docker.io/calacaly/pod-debug --ta
 
 + awk
 
++ cat
+
++ grep
+
 + jq
 
 + yq
@@ -57,3 +67,7 @@ kubectl -n test-ns debug -it test-demo --image=docker.io/calacaly/pod-debug --ta
 + procs [GitHub - dalance/procs: A modern replacement for ps written in Rust](https://github.com/dalance/procs)
 
 + hyperfine [GitHub - sharkdp/hyperfine: A command-line benchmarking tool](https://github.com/sharkdp/hyperfine)
+
++ ps 
+
++ top
