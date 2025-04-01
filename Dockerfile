@@ -21,9 +21,9 @@ RUN ls -l /usr/local/cargo/bin
 
 
 FROM debian:bookworm-slim
-RUN apt update && apt-get install --no-install-recommends curl tcpdump telnet netcat procps net-tools bind-utils iperf3 vim jq yq bash bash-completion \
+RUN apt-get update -y && apt-get install -y --no-install-recommends curl tcpdump telnet netcat procps net-tools bind-utils iperf3 vim jq yq bash bash-completion \
     # https://github.com/sharkdp/hyperfine
-    && apt-get install --no-install-recommends hyperfine \
+    && apt-get install -y --no-install-recommends hyperfine \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir /app
 COPY --from=go-builder /go/bin/tcping /app/tcping
