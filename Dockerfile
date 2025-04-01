@@ -14,7 +14,7 @@ RUN cargo install trippy \
 
 
 FROM alpine:latest
-RUN apk add --no-cache --update curl telnet tcpdump netcat net-tools bind-utils iperf3 vim jq yq bash bash-completion \
+RUN apk add --no-cache --update curl tcpdump busybox-extras net-tools bind-tools iperf3 vim jq yq bash bash-completion \
     # https://github.com/sharkdp/hyperfine
     && apk add --no-cache --update hyperfine \
     # https://github.com/dalance/procs
