@@ -3,7 +3,7 @@ FROM golang:alpine as go-builder
 RUN go install github.com/pouriyajamshidi/tcping/v2@latest \
     # https://github.com/six-ddc/plow
     && go install github.com/six-ddc/plow@latest
-
+RUN ls -l /go/bin
 
 FROM rust:slim-bullseye as rust-builder
 RUN apt-get update && apt-get install -y libssl-dev pkg-config make cmake
@@ -15,6 +15,7 @@ RUN cargo install trippy \
     && cargo install rustscan \
     # https://github.com/hatoo/oha
     && cargo install oha
+RUN ls -l /root/.cargo/bin
 
 
 FROM alpine:latest
