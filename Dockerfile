@@ -32,5 +32,6 @@ COPY --from=rust-builder /usr/local/cargo/bin/trip /app/trip
 COPY --from=rust-builder /usr/local/cargo/bin/btm /app/btm
 COPY --from=rust-builder /usr/local/cargo/bin/rustscan /app/rustscan
 COPY --from=rust-builder /usr/local/cargo/bin/oha /app/oha
+COPY --from=rust-builder /usr/local/cargo/bin/procs /app/procs
 ENV PATH="/app:${PATH}"
 
