@@ -26,11 +26,11 @@ RUN apt-get install -y --no-install-recommends \
     curl \ 
     tcpdump \ 
     # inetutils-telnet \
-    # netcat \
+    netcat \
     procps \
     net-tools \ 
     # bind9-dnsutils \
-    # iperf3 \
+    iperf3 \
     vim \
     jq \
     yq \
