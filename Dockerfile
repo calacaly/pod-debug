@@ -21,8 +21,8 @@ RUN ls -l /usr/local/cargo/bin
 
 
 FROM debian:bookworm-slim
-RUN apt-get update \ 
-    && apt-get install -y --no-install-recommends \
+RUN apt-get update 
+RUN apt-get install -y --no-install-recommends \
     curl \ 
     tcpdump \ 
     inetutils-telnet \
@@ -35,10 +35,10 @@ RUN apt-get update \
     jq \
     yq \
     bash \
-    bash-completion \
-    # https://github.com/sharkdp/hyperfine
-    && apt-get install -y --no-install-recommends hyperfine \
-    && rm -rf /var/lib/apt/lists/* \
+    bash-completion
+# https://github.com/sharkdp/hyperfine
+RUN apt-get install -y --no-install-recommends hyperfine
+RUN rm -rf /var/lib/apt/lists/* \
     && mkdir /app
 COPY --from=go-builder /go/bin/tcping /app/tcping
 COPY --from=go-builder /go/bin/plow /app/plow
