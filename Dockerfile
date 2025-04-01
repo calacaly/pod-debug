@@ -6,6 +6,7 @@ RUN go install github.com/pouriyajamshidi/tcping/v2@latest \
 
 
 FROM rust:slim-bullseye as rust-builder
+RUN apt-get update && apt-get install -y libssl-dev pkg-config make cmake
 # https://github.com/fujiapple852/trippy
 RUN cargo install trippy \
     # https://github.com/ClementTsang/bottom
@@ -24,12 +25,16 @@ RUN apk add --no-cache --update curl tcpdump busybox-extras net-tools bind-tools
     && apk add --no-cache --update procs \ 
     && mkdir /app
 COPY --from=go-builder /go/bin/tcping /app/tcping
+COPY --from=go-builder /go/bin/plow /app/plow
 COPY --from=rust-builder /root/.cargo/bin/trip /app/trip
 COPY --from=rust-builder /root/.cargo/bin/btm /app/btm
 COPY --from=rust-builder /root/.cargo/bin/rustscan /app/rustscan
+COPY --from=rust-builder /root/.cargo/bin/oha /app/oha
 ENV PATH="/app:${PATH}"
 RUN chmod +x /app/tcping \
+    && chmod +x /app/plow \
     && chmod +x /app/trip \ 
     && chmod +x /app/btm \ 
-    && chmod +x /app/rustscan
+    && chmod +x /app/rustscan \
+    && chmod +x /app/oha
 
