@@ -25,11 +25,11 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     curl \ 
     tcpdump \ 
-    telnet \
+    inetutils-telnet \
     netcat \
     procps \
     net-tools \ 
-    bind-utils \
+    bind9-dnsutils \
     iperf3 \
     vim \
     jq \
