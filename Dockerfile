@@ -1,4 +1,4 @@
-FROM golang:alpine as go-builder
+FROM golang:bookworm as go-builder
 # https://github.com/pouriyajamshidi/tcping
 RUN go install github.com/pouriyajamshidi/tcping/v2@latest \
     # https://github.com/six-ddc/plow
