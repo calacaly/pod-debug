@@ -21,7 +21,21 @@ RUN ls -l /usr/local/cargo/bin
 
 
 FROM debian:bookworm-slim
-RUN apt-get update -y && apt-get install -y --no-install-recommends curl tcpdump telnet netcat procps net-tools bind-utils iperf3 vim jq yq bash bash-completion \
+RUN apt-get update \ 
+    && apt-get install -y --no-install-recommends \
+    curl \ 
+    tcpdump \ 
+    telnet \
+    netcat \
+    procps \
+    net-tools \ 
+    bind-utils \
+    iperf3 \
+    vim \
+    jq \
+    yq \
+    bash \
+    bash-completion \
     # https://github.com/sharkdp/hyperfine
     && apt-get install -y --no-install-recommends hyperfine \
     && rm -rf /var/lib/apt/lists/* \
@@ -34,4 +48,6 @@ COPY --from=rust-builder /usr/local/cargo/bin/rustscan /app/rustscan
 COPY --from=rust-builder /usr/local/cargo/bin/oha /app/oha
 COPY --from=rust-builder /usr/local/cargo/bin/procs /app/procs
 ENV PATH="/app:${PATH}"
+
+CMD [ "/bin/bash" ]
 
