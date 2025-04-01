@@ -9,7 +9,7 @@
 kubectl run nginx --image=nginx
 
 # attach debug pod
-kubectl debug -it nginx --image=docker.io/calacaly/pod-debug:master --target=nginx
+kubectl debug -it nginx --image=docker.io/calacaly/pod-debug:master --target=nginx -- /bin/bash
 
 
 ```

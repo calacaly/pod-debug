@@ -14,16 +14,17 @@ RUN cargo install trippy \
     # https://github.com/bee-san/RustScan
     && cargo install rustscan \
     # https://github.com/hatoo/oha
-    && cargo install oha
+    && cargo install oha \ 
+    # https://github.com/dalance/procs
+    && cargo install procs
 RUN ls -l /usr/local/cargo/bin
 
 
-FROM alpine:latest
-RUN apk add --no-cache --update curl tcpdump gcompat busybox-extras net-tools bind-tools iperf3 vim jq yq bash bash-completion \
+FROM debian:bookworm-slim
+RUN apt update && apt-get install --no-install-recommends curl tcpdump telnet netcat procps net-tools bind-utils iperf3 vim jq yq bash bash-completion \
     # https://github.com/sharkdp/hyperfine
-    && apk add --no-cache --update hyperfine \
-    # https://github.com/dalance/procs
-    && apk add --no-cache --update procs \ 
+    && apt-get install --no-install-recommends hyperfine \
+    && rm -rf /var/lib/apt/lists/* \
     && mkdir /app
 COPY --from=go-builder /go/bin/tcping /app/tcping
 COPY --from=go-builder /go/bin/plow /app/plow
@@ -32,10 +33,4 @@ COPY --from=rust-builder /usr/local/cargo/bin/btm /app/btm
 COPY --from=rust-builder /usr/local/cargo/bin/rustscan /app/rustscan
 COPY --from=rust-builder /usr/local/cargo/bin/oha /app/oha
 ENV PATH="/app:${PATH}"
-RUN chmod +x /app/tcping \
-    && chmod +x /app/plow \
-    && chmod +x /app/trip \ 
-    && chmod +x /app/btm \ 
-    && chmod +x /app/rustscan \
-    && chmod +x /app/oha
 
