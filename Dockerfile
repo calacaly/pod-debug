@@ -28,6 +28,7 @@ RUN apt-get install -y --no-install-recommends \
     inetutils-telnet \
     netcat-openbsd \
     procps \
+    iproute2 \
     net-tools \ 
     bind9-dnsutils \
     iperf3 \
